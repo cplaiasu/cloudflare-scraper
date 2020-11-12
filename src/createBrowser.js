@@ -1,5 +1,5 @@
 const { addExtra } = require('puppeteer-extra');
-const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+// const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const { getUserAgent } = require('./utils');
 
 const {
@@ -25,9 +25,9 @@ if (!puppeteerCore) {
   }
 }
 
-const puppeteer = addExtra(puppeteerCore);
-const stealth = StealthPlugin();
-puppeteer.use(stealth);
+const puppeteer = puppeteerCore;
+// const stealth = StealthPlugin();
+// puppeteer.use(stealth);
 
 async function createBrowser(options) {
   const {
