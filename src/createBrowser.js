@@ -1,5 +1,5 @@
-// const { addExtra } = require('puppeteer-extra');
-// const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+const { addExtra } = require('puppeteer-extra');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const { getUserAgent } = require('./utils');
 
 const {
@@ -12,7 +12,7 @@ const {
 let chromium;
 let puppeteerCore;
 try {
-  puppeteerCore = require('puppeteer');
+  puppeteerCore = require('puppeteer-firefox');
 } catch (e) {}
 if (!puppeteerCore) {
   try {
@@ -25,9 +25,9 @@ if (!puppeteerCore) {
   }
 }
 
-const puppeteer = puppeteerCore;
-// const stealth = StealthPlugin();
-// puppeteer.use(stealth);
+const puppeteer = addExtra(puppeteerCore);
+const stealth = StealthPlugin();
+puppeteer.use(stealth);
 
 async function createBrowser(options) {
   const {
@@ -55,7 +55,8 @@ async function createBrowser(options) {
     ignoreHTTPSErrors,
     ...userPuppeteerOptions,
     args,
-    ignoreDefaultArgs: ['--enable-automation']
+    ignoreDefaultArgs: ['--enable-automation'],
+    defaultViewport: null
   };
 
   if (chromium) {

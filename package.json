@@ -24,7 +24,8 @@
     "puppeteer-extra-plugin-stealth": "^2.6.5",
     "request": "^2.88.2",
     "request-promise-native": "^1.0.8",
-    "stormwall-bypass": "^1.0.1"
+    "stormwall-bypass": "^1.0.1",
+    "puppeteer-firefox": "^0.5.1"
   },
   "devDependencies": {
     "puppeteer": "^5.4.1"
