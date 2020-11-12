@@ -1,4 +1,4 @@
-const { addExtra } = require('puppeteer-extra');
+// const { addExtra } = require('puppeteer-extra');
 // const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const { getUserAgent } = require('./utils');
 
@@ -42,7 +42,7 @@ async function createBrowser(options) {
     return puppeteer.connect({ browserWSEndpoint, browserUrl, ignoreHTTPSErrors });
   }
 
-  let args = ['--no-sandbox', '--disable-setuid-sandbox', '--user-agent=' + getUserAgent()];
+  let args = ['--no-sandbox', '--disable-blink-features=AutomationControlled', '--suppress-message-center-popups', '--disable-setuid-sandbox', '--user-agent=' + getUserAgent()];
   if(userPuppeteerOptions.args) {
     args = args.concat(userPuppeteerOptions.args)
   }
@@ -54,7 +54,8 @@ async function createBrowser(options) {
     headless: PUPPETEER_HEADLESS === 'true',
     ignoreHTTPSErrors,
     ...userPuppeteerOptions,
-    args
+    args,
+    ignoreDefaultArgs: ['--enable-automation']
   };
 
   if (chromium) {
